@@ -1,38 +1,50 @@
 import inquirer from 'inquirer'
 
-const lotofacilNum = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+choserNumber()
 
-inquirer.prompt(
-    [
-        {
-            type: 'list',
-            name: 'typeGame',
-            message: 'Selecione uma opção de jogo',
-            choices: [
-                'Lotofacil',
-                'Mega-Sena',
-                'Quina'
-            ]
+function choserNumber(){
+    inquirer.prompt(
+        [
+            {
+                type: 'list',
+                name: 'typeGame',
+                message: 'Selecione uma opção de jogo',
+                choices: [
+                    'Lotofacil',
+                    'Lotomania',
+                    'Quina'
+                ]
+            }
+        ]
+    ).then((resposta) => {
+    
+        let infoJogo;
+    
+        if(resposta.typeGame == 'Lotofacil'){
+            infoJogo = {
+                numeros : 25,
+                qtdNumeros: 15
+            }
         }
-    ]
-).then((resposta) => {
-
-    let infoJogo;
-
-    if(resposta.typeGame == 'Lotofacil'){
-        infoJogo = {
-            numeros : lotofacilNum,
-            qtdNumeros: 15
+        else if (resposta.typeGame == 'Lotomania'){
+            infoJogo = {
+                numeros : 100,              
+                qtdNumeros: 50
+            }
         }
-    }
-
-    const numeros = bubbleSort(getRandomUniqueNumbers(infoJogo.numeros, infoJogo.qtdNumeros));
-
-    console.log("Os seus números da sorte são: ");
-    numeros.forEach(element => {
-        process.stdout.write(`${element} `)
-    });
-}).catch((err) => { console.error(`Ocorreu um erro ${err}`) })
+    
+        const arrayNums = buildArray(infoJogo.numeros)
+    
+        const numeros = bubbleSort(getRandomUniqueNumbers(arrayNums, infoJogo.qtdNumeros));
+    
+        console.log("Os seus números da sorte são: ");
+        numeros.forEach(element => {
+            process.stdout.write(`${element} `)
+        });
+        console.log("\n")
+        choserNumber()
+    }).catch((err) => { console.error(`Ocorreu um erro ${err}`) })
+}
 
 
 //Algoritmo Fisher-Yates Shuffle
@@ -62,6 +74,14 @@ function bubbleSort(array) {
             }
         }
     }
-
     return array;
+}
+
+function buildArray(qtdNumeros){
+    let array = [];
+    for(let i =0; i<qtdNumeros;i++){
+        array.push(i+1)
+    }
+
+    return array
 }

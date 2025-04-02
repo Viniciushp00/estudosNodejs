@@ -1,0 +1,1 @@
+//Comando para criar inicializar projeto -- npm init
