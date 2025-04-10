@@ -1,0 +1,29 @@
+body{
+    margin: 0;
+    padding: 0;
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
+
+.container{
+    border: 1px solid black;
+    margin: 10px 0 10px 0;
+    width: 150px;
+    height: 250px;
+    display: inline-flex;
+}
+
+nav{
+    background-color: #dfdfdf;
+    margin: 0;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+}
+
+#logoSis{
+    margin: 0;
+}
